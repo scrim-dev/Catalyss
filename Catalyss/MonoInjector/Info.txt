@@ -1,0 +1,2 @@
+﻿Uses edited SharpMonoInjector by https://github.com/nolife99
+Original: https://github.com/warbler/SharpMonoInjector

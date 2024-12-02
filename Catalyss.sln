@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35521.163 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalyss", "Catalyss\Catalyss.csproj", "{458C05BB-11D9-429D-9DFE-CC399F9AF33F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalyssMod", "CatalyssMod\CatalyssMod.csproj", "{09C1A26C-D3CB-4C5A-984C-312F3B7B9B7B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FF95C350-70D8-44F4-9078-9AB14A416E5B}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{458C05BB-11D9-429D-9DFE-CC399F9AF33F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{458C05BB-11D9-429D-9DFE-CC399F9AF33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{458C05BB-11D9-429D-9DFE-CC399F9AF33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{458C05BB-11D9-429D-9DFE-CC399F9AF33F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09C1A26C-D3CB-4C5A-984C-312F3B7B9B7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09C1A26C-D3CB-4C5A-984C-312F3B7B9B7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09C1A26C-D3CB-4C5A-984C-312F3B7B9B7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09C1A26C-D3CB-4C5A-984C-312F3B7B9B7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
