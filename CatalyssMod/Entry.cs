@@ -7,7 +7,7 @@ namespace CatalyssMod
     public class Entry
     {
         public static GameObject? ModObj;
-        public const string ModVersion = "1.0";
+        public const string ModVersion = "1.1";
         public static Rect GuiRect = new(15, 15, 700, 500);
         public static bool GuiTog { get; set; } = false;
 

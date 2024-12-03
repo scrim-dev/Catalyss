@@ -15,6 +15,7 @@ namespace Catalyss
         //CatalyssMod
         //Entry
         //Load
+        private static nint Cnint = 0;
         public static void Inject(Injector injector)
         {
             byte[] Assem = File.ReadAllBytes($"{Directory.GetCurrentDirectory()}\\CatalyssMod.dll"); //Path
@@ -42,16 +43,17 @@ namespace Catalyss
                     (injector.Is64Bit
                     ? $"0x{remoteAssembly.ToInt64():X16}"
                     : $"0x{remoteAssembly.ToInt32():X8}"));
+
+                Cnint = remoteAssembly;
             }
         }
 
-        //Need to change this before release
         public static void Eject(Injector injector)
         {
-            //IntPtr Assem = 
+            IntPtr Assem = nint.Parse($"0x{Cnint.ToInt64():X16}");
             using (injector)
             {
-                /*try
+                try
                 {
                     injector.Eject(Assem, "CatalyssMod", "Entry", "Unload");
                     MessageBox.Show("Ejection successful");
@@ -63,7 +65,7 @@ namespace Catalyss
                 catch (Exception exc)
                 {
                     MessageBox.Show("Ejection failed (unknown error): " + exc);
-                }*/
+                }
             }
         }
     }

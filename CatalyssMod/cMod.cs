@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.Networking.Types;
 using UnityEngine.SceneManagement;
 
 namespace CatalyssMod
@@ -9,27 +10,67 @@ namespace CatalyssMod
     {
         public GameObject GetPlayer()
         {
-            try
+            //Should fix multiplayer
+            if (Player._mainPlayer.Network_isHostPlayer)
             {
-                return GameObject.Find($"[connID: 0] _player({Player._mainPlayer._nickname})");
+                try
+                {
+                    return GameObject.Find($"[connID: 0] _player({Player._mainPlayer._nickname})");
+                }
+                catch { return Player._mainPlayer.gameObject; }
             }
-            catch
+            else
             {
-                return Player._mainPlayer.gameObject;
+                try
+                {
+                    return GameObject.Find($"_player({Player._mainPlayer._nickname})");
+                }
+                catch { return Player._mainPlayer.gameObject; }
             }
         }
 
+        //private readonly float FlightSpeed = 5f;
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
                 Entry.GuiTog = !Entry.GuiTog;
             }
+
+            if (IsFlightActive)
+            {
+                //Will fix later
+                /*Vector3 movementDirection = Vector3.zero;
+
+                if (GetPlayer() != null)
+                {
+                    //Up down
+                    movementDirection -= GetPlayer().transform.up * (Input.GetKey(KeyCode.Q) ? 1 : 0);
+                    movementDirection += GetPlayer().transform.up * (Input.GetKey(KeyCode.E) ? 1 : 0);
+
+                    //Movement
+                    movementDirection += GetPlayer().transform.forward * (Input.GetKey(KeyCode.W) ? 1 : 0);
+                    movementDirection -= GetPlayer().transform.right * (Input.GetKey(KeyCode.A) ? 1 : 0);
+                    movementDirection -= GetPlayer().transform.forward * (Input.GetKey(KeyCode.S) ? 1 : 0);
+                    movementDirection += GetPlayer().transform.right * (Input.GetKey(KeyCode.D) ? 1 : 0);
+                }
+
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    GetPlayer().transform.position += movementDirection * FlightSpeed * 2.5f * Time.deltaTime;
+                }
+                else
+                {
+                    GetPlayer().transform.position += movementDirection * FlightSpeed * Time.deltaTime;
+                }*/
+            }
         }
 
         private void OnGUI()
         {
-            GUI.Label(new Rect(5f, 15f, 160f, 90f), $"<color=magenta> Catalyss is Loaded!</color>");
+            GUI.Label(new Rect(15f, 25f, 160f, 90f), $"<color=magenta>Catalyss is Loaded!</color>");
+            GUI.Label(new Rect(15f, 40f, 160f, 90f), $"<color=magenta>{DateTime.Now:hh:mm:ss}</color>");
+
             if (Entry.GuiTog)
             {
                 var GuiName = $"<color=magenta>Catalyss</color> <color=white>v{Entry.ModVersion}</color>";
@@ -58,7 +99,11 @@ namespace CatalyssMod
         private bool IsAOEActive = false;
         private string AOEText = "OFF";
 
+        private bool IsFlightActive = false;
+        private string FlightText = "OFF";
+
         private int ExpPointAmount { get; set; } = 20;
+
         void ModGUI(int WindowId)
         {
             GUI.backgroundColor = Color.black;
@@ -107,7 +152,7 @@ namespace CatalyssMod
 
                     if (GetPlayer() != null)
                     {
-                        GetPlayer().GetComponentInChildren<PlayerMove>()._standardJumpForce = 20;
+                        GetPlayer().GetComponentInChildren<PlayerMove>()._standardJumpForce = 33;
                     }
                 }
             }
@@ -284,7 +329,23 @@ namespace CatalyssMod
                 }
             }
 
-            if (GUI.Button(new Rect(340, 270, 300, 30), "Quit Game"))
+            if (GUI.Button(new Rect(340, 270, 300, 30), $"Player Flight (Bugged) [{FlightText}]"))
+            {
+                if (GetPlayer() != null)
+                {
+                    IsFlightActive = !IsFlightActive;
+                    if (IsFlightActive)
+                    {
+                        FlightText = "ON";
+                    }
+                    else
+                    {
+                        FlightText = "OFF";
+                    }
+                }
+            }
+
+            if (GUI.Button(new Rect(340, 310, 300, 30), "Quit Game"))
             {
                 Application.Quit();
             }
