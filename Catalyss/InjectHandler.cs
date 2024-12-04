@@ -12,6 +12,20 @@ namespace Catalyss
     internal class InjectHandler
     {
         private static Injector MonoInjector;
+
+        private static void LaunchGame()
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "steam://rungameid/2768430",
+                    UseShellExecute = true
+                });
+            }
+            catch { }
+        }
+
         public static void EventReceived(object sender, string message)
         {
             //var window = (PhotinoWindow)sender;
@@ -49,6 +63,27 @@ namespace Catalyss
                     MessageBox.Show("Atlyss game process is NOT active!");
                 }
             }
+            else if (message == "StartGame")
+            {
+                LaunchGame();
+            }
+            else if(message == "QuitGame")
+            {
+                QuitGame();
+            }
+        }
+
+        private static void QuitGame()
+        {
+            try
+            {
+                Process[] processes = Process.GetProcessesByName("ATLYSS");
+                foreach (var process in processes)
+                {
+                    process.Kill();
+                }
+            }
+            catch { }
         }
 
         private static bool IsAtlyssProcessRunning()

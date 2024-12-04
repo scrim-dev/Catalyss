@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 namespace CatalyssMod
 {
-    internal class cMod : MonoBehaviour
+    internal class CatalyssMonoMod : MonoBehaviour
     {
-        public GameObject GetPlayer()
+        public static GameObject GetPlayer()
         {
             //Should fix multiplayer
             if (Player._mainPlayer.Network_isHostPlayer)
@@ -29,80 +29,58 @@ namespace CatalyssMod
             }
         }
 
-        //private readonly float FlightSpeed = 5f;
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
                 Entry.GuiTog = !Entry.GuiTog;
             }
-
-            if (IsFlightActive)
-            {
-                //Will fix later
-                /*Vector3 movementDirection = Vector3.zero;
-
-                if (GetPlayer() != null)
-                {
-                    //Up down
-                    movementDirection -= GetPlayer().transform.up * (Input.GetKey(KeyCode.Q) ? 1 : 0);
-                    movementDirection += GetPlayer().transform.up * (Input.GetKey(KeyCode.E) ? 1 : 0);
-
-                    //Movement
-                    movementDirection += GetPlayer().transform.forward * (Input.GetKey(KeyCode.W) ? 1 : 0);
-                    movementDirection -= GetPlayer().transform.right * (Input.GetKey(KeyCode.A) ? 1 : 0);
-                    movementDirection -= GetPlayer().transform.forward * (Input.GetKey(KeyCode.S) ? 1 : 0);
-                    movementDirection += GetPlayer().transform.right * (Input.GetKey(KeyCode.D) ? 1 : 0);
-                }
-
-                if (Input.GetKey(KeyCode.LeftShift))
-                {
-                    GetPlayer().transform.position += movementDirection * FlightSpeed * 2.5f * Time.deltaTime;
-                }
-                else
-                {
-                    GetPlayer().transform.position += movementDirection * FlightSpeed * Time.deltaTime;
-                }*/
-            }
         }
 
         private void OnGUI()
         {
-            GUI.Label(new Rect(15f, 25f, 160f, 90f), $"<color=magenta>Catalyss is Loaded!</color>");
-            GUI.Label(new Rect(15f, 40f, 160f, 90f), $"<color=magenta>{DateTime.Now:hh:mm:ss}</color>");
-
+            GUI.Label(new Rect(15f, 25f, 360f, 90f), $"<size=15><color=magenta>Catalyss is Loaded!</color></size>");
             if (Entry.GuiTog)
             {
-                var GuiName = $"<color=magenta>Catalyss</color> <color=white>v{Entry.ModVersion}</color>";
-                Entry.GuiRect = GUI.Window(0, Entry.GuiRect, ModGUI, GuiName);
+                Entry.GuiRect = GUI.Window(0, Entry.GuiRect, ModGUI, $"<color=magenta>Catalyss</color> <color=white>v{Entry.ModVersion}</color>");
             }
         }
 
-        private bool IsSpeedBoostActive = false;
-        private string SpeedBoostText = "OFF";
+        public static bool LoopGM = false;
+        public static bool LoopStam = false;
 
-        private bool IsBigJumpActive = false;
-        private string BigJumpText = "OFF";
+        private bool IsSpeedBoostActive { get; set; } = false;
+        private string SpeedBoostText = "<color=red>OFF</color>";
 
-        private bool IsInfJumpActive = false;
-        private string InfJumpText = "OFF";
+        private bool IsBigJumpActive { get; set; } = false;
+        private string BigJumpText = "<color=red>OFF</color>";
 
-        private bool IsHoverActive = false;
-        private string HoverText = "OFF";
+        private bool IsInfJumpActive { get; set; } = false;
+        private string InfJumpText = "<color=red>OFF</color>";
 
-        private bool IsNoCDWActive = false;
-        private string NoCooldownsText = "OFF";
+        private bool IsHoverActive { get; set; } = false;
+        private string HoverText = "<color=red>OFF</color>";
 
-        private bool IsHugeDamageActive = false;
-        private string HugeDmgText = "OFF";
+        private bool IsNoCDWActive { get; set; } = false;
+        private string NoCooldownsText = "<color=red>OFF</color>";
 
-        private bool IsAOEActive = false;
-        private string AOEText = "OFF";
+        private bool IsHugeDamageActive { get; set; } = false;
+        private string HugeDmgText = "<color=red>OFF</color>";
 
-        private bool IsFlightActive = false;
-        private string FlightText = "OFF";
+        private bool IsAOEActive { get; set; } = false;
+        private string AOEText = "<color=red>OFF</color>";
+
+        private bool IsGodModeActive { get; set; } = false;
+        private string GodModeText = "<color=red>OFF</color>";
+
+        private bool IsInfStamActive { get; set; } = false;
+        private string InfStamText = "<color=red>OFF</color>";
+
+        private bool IsAutoPActive { get; set; } = false;
+        private string AutoPText = "<color=red>OFF</color>";
 
         private int ExpPointAmount { get; set; } = 20;
+        public string UserItemInput { get; set; } = "";
 
         void ModGUI(int WindowId)
         {
@@ -110,13 +88,13 @@ namespace CatalyssMod
             GUI.contentColor = Color.magenta;
             GUI.color = Color.magenta;
 
-            //40
+            //40 distance
             if (GUI.Button(new Rect(20, 30, 300, 30), $"Speed Boost [{SpeedBoostText}]"))
             {
                 IsSpeedBoostActive = !IsSpeedBoostActive;
                 if (IsSpeedBoostActive)
                 {
-                    SpeedBoostText = "ON";
+                    SpeedBoostText = "<color=green>ON</color>";
 
                     if (GetPlayer() != null)
                     {
@@ -125,7 +103,7 @@ namespace CatalyssMod
                 }
                 else
                 {
-                    SpeedBoostText = "OFF";
+                    SpeedBoostText = "<color=red>OFF</color>";
 
                     if (GetPlayer() != null)
                     {
@@ -139,7 +117,7 @@ namespace CatalyssMod
                 IsBigJumpActive = !IsBigJumpActive;
                 if (IsBigJumpActive)
                 {
-                    BigJumpText = "ON";
+                    BigJumpText = "<color=green>ON</color>";
 
                     if (GetPlayer() != null)
                     {
@@ -148,7 +126,7 @@ namespace CatalyssMod
                 }
                 else
                 {
-                    BigJumpText = "OFF";
+                    BigJumpText = "<color=red>OFF</color>";
 
                     if (GetPlayer() != null)
                     {
@@ -162,7 +140,7 @@ namespace CatalyssMod
                 IsInfJumpActive = !IsInfJumpActive;
                 if (IsInfJumpActive)
                 {
-                    InfJumpText = "ON";
+                    InfJumpText = "<color=green>ON</color>";
 
                     if (GetPlayer() != null)
                     {
@@ -171,7 +149,7 @@ namespace CatalyssMod
                 }
                 else
                 {
-                    InfJumpText = "OFF";
+                    InfJumpText = "<color=red>OFF</color>";
 
                     if (GetPlayer() != null)
                     {
@@ -185,7 +163,7 @@ namespace CatalyssMod
                 IsHoverActive = !IsHoverActive;
                 if (IsHoverActive)
                 {
-                    HoverText = "ON";
+                    HoverText = "<color=green>ON</color>";
 
                     if (GetPlayer() != null)
                     {
@@ -196,7 +174,7 @@ namespace CatalyssMod
                 }
                 else
                 {
-                    HoverText = "OFF";
+                    HoverText = "<color=red>OFF</color>";
 
                     if (GetPlayer() != null)
                     {
@@ -212,7 +190,7 @@ namespace CatalyssMod
                 IsNoCDWActive = !IsNoCDWActive;
                 if (IsNoCDWActive)
                 {
-                    NoCooldownsText = "ON";
+                    NoCooldownsText = "<color=green>ON</color>";
 
                     if (GetPlayer() != null)
                     {
@@ -223,7 +201,7 @@ namespace CatalyssMod
                 }
                 else
                 {
-                    NoCooldownsText = "OFF";
+                    NoCooldownsText = "<color=red>OFF</color>";
 
                     if (GetPlayer() != null)
                     {
@@ -239,7 +217,7 @@ namespace CatalyssMod
                 IsHugeDamageActive = !IsHugeDamageActive;
                 if (IsHugeDamageActive)
                 {
-                    HugeDmgText = "ON";
+                    HugeDmgText = "<color=green>ON</color>";
 
                     if (GetPlayer() != null)
                     {
@@ -248,7 +226,7 @@ namespace CatalyssMod
                 }
                 else
                 {
-                    HugeDmgText = "OFF";
+                    HugeDmgText = "<color=red>OFF</color>";
 
                     if (GetPlayer() != null)
                     {
@@ -262,7 +240,7 @@ namespace CatalyssMod
                 IsAOEActive = !IsAOEActive;
                 if (IsAOEActive)
                 {
-                    AOEText = "ON";
+                    AOEText = "<color=green>ON</color>";
 
                     if (GetPlayer() != null)
                     {
@@ -271,11 +249,12 @@ namespace CatalyssMod
                 }
                 else
                 {
-                    AOEText = "OFF";
+                    AOEText = "<color=red>OFF</color>";
 
                     if (GetPlayer() != null)
                     {
                         GetPlayer().GetComponentInChildren<PlayerCombat>()._currentScriptableWeaponType._hitboxScale = new Vector3(1.5f, 1.5f, 1.5f);
+                        GetPlayer().GetComponentInChildren<PlayerCombat>().Cmd_ResetHitboxes();
                     }
                 }
             }
@@ -329,33 +308,152 @@ namespace CatalyssMod
                 }
             }
 
-            if (GUI.Button(new Rect(340, 270, 300, 30), $"Player Flight (Bugged) [{FlightText}]"))
+            if (GUI.Button(new Rect(340, 270, 300, 30), $"Add Money"))
             {
                 if (GetPlayer() != null)
                 {
-                    IsFlightActive = !IsFlightActive;
-                    if (IsFlightActive)
+                    GetPlayer().GetComponentInChildren<PlayerInventory>().Add_Currency(50);
+                }
+            }
+
+            if (GUI.Button(new Rect(340, 310, 300, 30), $"Goon"))
+            {
+                if (GetPlayer() != null)
+                {
+                    GetPlayer().GetComponentInChildren<PlayerRaceModel>()._displayBoobs = true;
+                    GetPlayer().GetComponentInChildren<PlayerRaceModel>()._boobWeight = 400;
+                    GetPlayer().GetComponentInChildren<PlayerRaceModel>()._bottomWeight = 400;
+                }
+            }
+
+            if (GUI.Button(new Rect(340, 350, 300, 30), $"Fat"))
+            {
+                if (GetPlayer() != null)
+                {
+                    GetPlayer().GetComponentInChildren<PlayerRaceModel>()._widthWeight = 400;
+                    GetPlayer().GetComponentInChildren<PlayerRaceModel>()._bellyWeight = 400;
+                }
+            }
+
+            if (GUI.Button(new Rect(340, 390, 300, 30), $"Hide Steam ID"))
+            {
+                if (GetPlayer() != null)
+                {
+                    GetPlayer().GetComponentInChildren<Player>()._steamID = "CATALYSS EVILMANE INC";
+                }
+            }
+
+            if (GUI.Button(new Rect(340, 430, 300, 30), $"Drop Money"))
+            {
+                if (GetPlayer() != null)
+                {
+                    GetPlayer().GetComponentInChildren<PlayerInventory>().Cmd_AddCurrency(500);
+                    GetPlayer().GetComponentInChildren<PlayerInventory>().Cmd_DropCurrency(500);
+                }
+            }
+
+            //Other side
+            if (GUI.Button(new Rect(20, 310, 300, 30), $"GOD MODE [{GodModeText}]"))
+            {
+                if (GetPlayer() != null)
+                {
+                    IsGodModeActive = !IsGodModeActive;
+                    if (IsGodModeActive)
                     {
-                        FlightText = "ON";
+                        GodModeText = "<color=green>ON</color>";
+                        GetPlayer().GetComponentInChildren<StatusEntity>()._currentHealth = 999;
+                        GetPlayer().GetComponentInChildren<StatusEntity>().Network_currentHealth = 999;
+                        GetPlayer().GetComponentInChildren<StatusEntity>().Add_Health(999);
+                        LoopGM = true;
                     }
                     else
                     {
-                        FlightText = "OFF";
+                        //Ngl too lazy to make a check/cache for ur original health uhh deal with it 4 now I guess lol
+                        GodModeText = "<color=red>OFF</color>";
+                        GetPlayer().GetComponentInChildren<StatusEntity>()._currentHealth = 50;
+                        GetPlayer().GetComponentInChildren<StatusEntity>().Network_currentHealth = 50;
+                        GetPlayer().GetComponentInChildren<StatusEntity>().Add_Health(1);
+                        LoopGM = false;
                     }
                 }
             }
 
-            if (GUI.Button(new Rect(340, 310, 300, 30), "Quit Game"))
+            if (GUI.Button(new Rect(20, 350, 300, 30), $"INF Stamina [{InfStamText}]"))
             {
-                Application.Quit();
+                if (GetPlayer() != null)
+                {
+                    IsInfStamActive = !IsInfStamActive;
+                    if (IsInfStamActive)
+                    {
+                        InfStamText = "<color=green>ON</color>";
+                        GetPlayer().GetComponentInChildren<StatusEntity>().Change_Stamina(9999);
+                        GetPlayer().GetComponentInChildren<StatusEntity>().Network_currentStamina = 9999;
+                        GetPlayer().GetComponentInChildren<StatusEntity>()._currentStamina = 9999;
+                        LoopStam = true;
+                    }
+                    else
+                    {
+                        //Same as health LOOOOL
+                        InfStamText = "<color=red>OFF</color>";
+                        GetPlayer().GetComponentInChildren<StatusEntity>().Change_Stamina(100);
+                        GetPlayer().GetComponentInChildren<StatusEntity>().Network_currentStamina = 100;
+                        GetPlayer().GetComponentInChildren<StatusEntity>()._currentStamina = 100;
+                        LoopStam = false;
+                    }
+                }
             }
 
-            GUI.DragWindow(new Rect(0, 0, 10000, 20));
-        }
+            if (GUI.Button(new Rect(20, 390, 300, 30), $"Auto Parry [{AutoPText}]"))
+            {
+                if (GetPlayer() != null)
+                {
+                    IsAutoPActive = !IsAutoPActive;
+                    if (IsAutoPActive)
+                    {
+                        AutoPText = "<color=green>ON</color>";
+                        GetPlayer().GetComponentInChildren<StatusEntity>()._autoParry = true;
+                    }
+                    else
+                    {
+                        //Same as health LOOOOL
+                        AutoPText = "<color=red>OFF</color>";
+                        GetPlayer().GetComponentInChildren<StatusEntity>()._autoParry = false;
+                    }
+                }
+            }
 
-        private void OnDisable()
-        {
-            Process.GetCurrentProcess().Kill();
+            if (GUI.Button(new Rect(20, 430, 300, 30), $"Force Revive"))
+            {
+                if (GetPlayer() != null)
+                {
+                    GetPlayer().GetComponentInChildren<StatusEntity>().Cmd_RevivePlayer(Player._mainPlayer);
+                    GetPlayer().GetComponentInChildren<StatusEntity>().Cmd_ReplenishAll();
+                }
+            }
+
+            if (GUI.Button(new Rect(300, 470, 300, 30), $"Next Page -->"))
+            {
+                //For next update
+            }
+
+            /*UserItemInput = GUI.TextField(new Rect(20, 350, 200, 40), "ItemName");
+
+            if (GUI.Button(new Rect(20, 360, 300, 30), "Give Item"))
+            {
+                if (GetPlayer() != null)
+                {
+                    var aItem = new ItemData()
+                    {
+                        _itemName = UserItemInput,
+                        _quantity = 69, //niceeee
+                        _isEquipped = false,
+                        _slotNumber = 1,
+                    };
+                    GetPlayer().GetComponentInChildren<PlayerInventory>().Add_Item(aItem);
+                }
+            }*/
+
+            GUI.DragWindow(new Rect(0, 0, 10000, 200));
         }
     }
 }

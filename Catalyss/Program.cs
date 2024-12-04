@@ -9,15 +9,21 @@ namespace Catalyss
         [STAThread]
         static void Main()
         {
-            string windowTitle = "Catalyss Injector v1.0";
+            using var mutex = new Mutex(true, "CAT_INJ_APP", out bool isFirstInstance);
+            if (!isFirstInstance)
+            {
+                MessageBox.Show("The injector is already opened!", "Catalyss", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string windowTitle = "Catalyss Injector v1.1";
 
             // Creating a new PhotinoWindow instance with the fluent API
-#pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
             var window = new PhotinoWindow()
                 .SetTitle(windowTitle)
                 // Resize to a percentage of the main monitor work area
                 .SetUseOsDefaultSize(false)
-                .SetSize(new Size(1000, 650))
+                .SetSize(new Size(1300, 750))
                 // Center window in the middle of the screen
                 .Center()
                 // Users can resize windows by default.
@@ -30,7 +36,7 @@ namespace Catalyss
                         (() =>{
                             window.setTimeout(() => {
                                 alert(`Only inject when you're in the game's main menu!`);
-                            }, 1000);
+                            }, 563);
                         })();
                     "));
                 })
@@ -40,7 +46,6 @@ namespace Catalyss
                 // This could be added in the PhotinoWindowOptions if preferred.
                 .RegisterWebMessageReceivedHandler(InjectHandler.EventReceived)
                 .Load("wwwroot/index.html"); // Can be used with relative path strings or "new URI()" instance to load a website.
-#pragma warning restore CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
 
             window.WaitForClose(); // Starts the application event loop
         }
