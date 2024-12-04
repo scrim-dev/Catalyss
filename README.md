@@ -19,6 +19,7 @@ Support to load other mods or load with other mods (Currently Catalyss doesn't w
 Launch the game, wait for the main menu to appear then inject. <br>
 Press 'F' to Open and Close the Mod Menu. <br>
 If any function breaks just turn it off and on again (Will be fixed next update). <br>
+This game mod/trainer is for educational purposes. <br>
 
 ## Images
 ![picfix](https://github.com/user-attachments/assets/95e4d468-5af9-4dd3-b0df-0e0919864d16)
