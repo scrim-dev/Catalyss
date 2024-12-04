@@ -1,12 +1,10 @@
 ﻿using Catalyss.ML;
 using MelonLoader;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
+
 [assembly: MelonInfo(typeof(Loader), "Catalyss Loader", "1.0", "Scrimmane (Scrim)")]
 [assembly: MelonGame("KisSoft", "ATLYSS")]
 [assembly: MelonPriority(0)]
@@ -26,6 +24,10 @@ namespace Catalyss.ML
             {
                 try { Directory.CreateDirectory(dllLoc); } 
                 catch { MelonLogger.Error("Failed to load directory."); }
+            }
+            else
+            {
+                MelonLogger.Msg("Catalyss path found.");
             }
         }
 
@@ -56,6 +58,7 @@ namespace Catalyss.ML
                     {
                         MelonLogger.Msg($"Found and invoking entry point.");
                         entryMethod.Invoke(null, null);
+                        MelonLogger.Msg("Catalyss Loaded!");
                     }
                     else
                     {
