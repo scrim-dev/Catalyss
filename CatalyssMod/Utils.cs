@@ -72,6 +72,12 @@ namespace CatalyssMod
                 GetPlayer().GetComponentInChildren<Player>()._inIFrame = false;
                 GetPlayer().GetComponentInChildren<Player>().Set_IFrame(0);
             }
+
+            if(CatalyssMonoMod.InfManaTog)
+            {
+                GetPlayer().GetComponentInChildren<StatusEntity>().Change_Mana(9999);
+                GetPlayer().GetComponentInChildren<StatusEntity>()._manaRegenRate = 9999;
+            }
         }
 
         public static void Spin(float speed_val)
@@ -80,6 +86,19 @@ namespace CatalyssMod
             {
                 GetPlayer().GetComponentInChildren<PlayerVisual>().Rpc_RandomSpinPlayerModel(speed_val);
             }
+        }
+
+        public static void JoinPlyrByID()
+        {
+            try 
+            { 
+                string s = File.ReadAllText($"{Directory.GetCurrentDirectory}\\PlayerSteamID.txt");
+                if (s.Length > 0)
+                {
+
+                }
+            }
+            catch { return; }
         }
 
         private void OnGUI() { GUI.Label(new Rect(15, 10, 2000, 30), $"{Application.unityVersion}"); }

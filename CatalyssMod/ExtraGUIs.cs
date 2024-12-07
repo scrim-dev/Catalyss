@@ -9,6 +9,9 @@ namespace CatalyssMod
 {
     internal class ExtraGUIs : MonoBehaviour
     {
-        public void OnGUI() { /*Uhh to do lol*/ }
+        public void OnGUI()
+        {
+
+        }
     }
 }

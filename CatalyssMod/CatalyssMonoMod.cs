@@ -67,7 +67,10 @@ namespace CatalyssMod
         private bool IsAutoPActive { get; set; } = false;
         private string AutoPText = "<color=red>OFF</color>";
 
-        private int ExpPointAmount { get; set; } = 20;
+        private int ExpPointAmount { get; set; } = 10;
+        
+        public static bool InfManaTog { get; set; } = false;
+        public string InfManaText = "<color=red>OFF</color>";
 
         public static int MenuPage = 1;
         void ModGUI(int WindowId)
@@ -480,6 +483,19 @@ namespace CatalyssMod
                         else
                         {
                             IFramePText = "<color=red>OFF</color>";
+                        }
+                    }
+
+                    if (GUI.Button(new Rect(20, 150, 300, 30), $"Inf Mana [{InfManaText}]"))
+                    {
+                        InfManaTog = !InfManaTog;
+                        if (InfManaTog)
+                        {
+                            InfManaText = "<color=green>ON</color>";
+                        }
+                        else
+                        {
+                            InfManaText = "<color=red>OFF</color>";
                         }
                     }
 
