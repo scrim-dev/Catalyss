@@ -1,8 +1,4 @@
-﻿using System.Diagnostics;
-using System.Runtime.InteropServices;
-using UnityEngine;
-using UnityEngine.Networking.Types;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 namespace CatalyssMod
 {
@@ -19,6 +15,7 @@ namespace CatalyssMod
         private void OnGUI()
         {
             GUI.Label(new Rect(15f, 25f, 360f, 90f), $"<size=15><color=magenta>Catalyss is Loaded!</color></size>");
+            if (HandleItemDropMenu) { return; }
             if (Entry.GuiTog)
             {
                 Entry.GuiRect = GUI.Window(0, Entry.GuiRect, ModGUI, $"<color=magenta>Catalyss</color> <color=white>v{Entry.ModVersion}</color>");
@@ -70,9 +67,11 @@ namespace CatalyssMod
         private int ExpPointAmount { get; set; } = 10;
         
         public static bool InfManaTog { get; set; } = false;
+        public static bool HandleItemDropMenu { get; set; } = false;
         public string InfManaText = "<color=red>OFF</color>";
 
         public static int MenuPage = 1;
+
         void ModGUI(int WindowId)
         {
             switch (MenuPage)
@@ -497,6 +496,16 @@ namespace CatalyssMod
                         {
                             InfManaText = "<color=red>OFF</color>";
                         }
+                    }
+
+                    if (GUI.Button(new Rect(20, 190, 300, 30), "Item Drop Menu"))
+                    {
+                        HandleItemDropMenu = !HandleItemDropMenu;
+                    }
+
+                    if (GUI.Button(new Rect(20, 230, 300, 30), "Glam"))
+                    {
+                        Utils.SendFX(3); //Idk lol
                     }
 
                     break;

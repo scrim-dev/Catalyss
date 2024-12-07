@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.PlayerLoop;
-using UnityEngine.UIElements;
+﻿using UnityEngine;
 
 namespace CatalyssMod
 {
@@ -15,10 +7,7 @@ namespace CatalyssMod
         //Helper class for other game stuff
         public static Player GetPlayer() { return Player._mainPlayer; }
 
-        private void Awake()
-        {
-            //To do
-        }
+        private void Awake() { Application.targetFrameRate = 999; }
 
         private void Start()
         {
@@ -87,15 +76,43 @@ namespace CatalyssMod
             }
         }
 
-        public static void JoinPlyrByID()
+        public static void SendFX(int opt)
         {
-            try 
-            { 
-                string s = File.ReadAllText($"{Directory.GetCurrentDirectory}\\PlayerSteamID.txt");
-                if (s.Length > 0)
+            if (GetPlayer() != null)
+            {
+                switch(opt)
                 {
-                    //To do
+                    case 0:
+                        GetPlayer().GetComponentInChildren<PlayerVisual>().Rpc_VanitySparkleEffect();
+                        break;
+                    case 1:
+                        GetPlayer().GetComponentInChildren<PlayerVisual>().Rpc_PoofSmokeEffect();
+                        break;
+                    case 2:
+                        GetPlayer().GetComponentInChildren<PlayerVisual>().Rpc_PlayTeleportEffect();
+                        break;
+                    default:
+                        GetPlayer().GetComponentInChildren<PlayerVisual>().Rpc_VanitySparkleEffect();
+                        GetPlayer().GetComponentInChildren<PlayerVisual>().Rpc_PoofSmokeEffect();
+                        GetPlayer().GetComponentInChildren<PlayerVisual>().Rpc_PlayTeleportEffect();
+                        break;
                 }
+            }
+        }
+
+        public static void DropNewItem(string itemname, int amount)
+        {
+            try
+            {
+                var item = new ItemData()
+                {
+                    _slotNumber = 0,
+                    _itemName = itemname,
+                    _isEquipped = false,
+                    _maxQuantity = amount
+                };
+                GetPlayer().GetComponentInChildren<PlayerInventory>().Add_Item(item);
+                GetPlayer().GetComponentInChildren<PlayerInventory>().Cmd_DropItem(item, amount);
             }
             catch { return; }
         }
