@@ -12,11 +12,16 @@ namespace CatalyssMod
         {
             if (CatalyssMonoMod.HandleItemDropMenu)
             {
+                if(Input.GetKeyDown(KeyCode.Escape))
+                {
+                    CatalyssMonoMod.HandleItemDropMenu = false;
+                }
+
                 GUI.backgroundColor = Color.gray;
                 GUI.contentColor = Color.magenta;
                 GUI.color = Color.magenta;
 
-                GUI.Box(new Rect(10, 25 * Offset, 350, 350), "Items Menu");
+                GUI.Box(new Rect(10, 25 * Offset, 350, 350), $"Game Items Menu");
 
                 GUI.Label(new Rect(20, 40 * Offset, 100, 80), "Item to drop:\n(Increase slider for amount)");
                 inputText = GUI.TextField(new Rect(120, 40 * Offset, 200, 20), inputText);

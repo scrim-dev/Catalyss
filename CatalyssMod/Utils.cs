@@ -1,4 +1,8 @@
-﻿using Mirror;
+﻿using System;
+using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Threading;
 using UnityEngine;
 
 namespace CatalyssMod
@@ -8,7 +12,27 @@ namespace CatalyssMod
         //Helper class for other game stuff
         public static Player GetPlayer() { return Player._mainPlayer; }
 
-        private void Awake() { Application.targetFrameRate = 999; }
+        private void Awake()
+        {
+            Application.targetFrameRate = 999;
+        }
+
+        public static void Invoker(object Class, string Method, string _params)
+        {
+            Type type = Class.GetType();
+            if (type == null)
+            {
+                return;
+            }
+            MethodInfo method = type.GetMethod(Method, BindingFlags.NonPublic | BindingFlags.Instance);
+            if (method == null)
+            {
+                return;
+            }
+            object instance = Activator.CreateInstance(type);
+            object[] parameters = new object[] { _params };
+            try { method.Invoke(instance, parameters); } catch { }
+        }
 
         private void Start()
         {
@@ -67,11 +91,6 @@ namespace CatalyssMod
                 GetPlayer().GetComponentInChildren<StatusEntity>().Change_Mana(9999);
                 GetPlayer().GetComponentInChildren<StatusEntity>()._manaRegenRate = 9999;
             }
-
-            if (CatalyssMonoMod.PlyrRotate)
-            {
-                //To do
-            }
         }
 
         public static void Spin(float speed_val)
@@ -120,12 +139,6 @@ namespace CatalyssMod
                 GetPlayer().GetComponentInChildren<PlayerInventory>().Add_Item(item);
                 GetPlayer().GetComponentInChildren<PlayerInventory>().Cmd_DropItem(item, amount);
             }
-            catch { return; }
-        }
-
-        public static void Test(float jumpforce, float forwardforce, float gravmultiplier)
-        {
-            try { GetPlayer().GetComponentInChildren<PlayerMove>().Init_Jump(jumpforce, forwardforce, gravmultiplier); }
             catch { return; }
         }
 
