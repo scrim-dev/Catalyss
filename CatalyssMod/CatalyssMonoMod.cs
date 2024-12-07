@@ -68,6 +68,8 @@ namespace CatalyssMod
         
         public static bool InfManaTog { get; set; } = false;
         public static bool HandleItemDropMenu { get; set; } = false;
+        public static bool PlyrRotate { get; set; } = false;
+
         public string InfManaText = "<color=red>OFF</color>";
 
         public static int MenuPage = 1;
@@ -509,9 +511,9 @@ namespace CatalyssMod
                         HandleItemDropMenu = !HandleItemDropMenu;
                     }
 
-                    if (GUI.Button(new Rect(20, 230, 300, 30), "Glam"))
+                    if (GUI.Button(new Rect(20, 230, 300, 30), "Player Rotation (Arrow Keys)"))
                     {
-                        Utils.SendFX(3); //Idk lol
+                        PlyrRotate = !PlyrRotate;
                     }
 
                     break;

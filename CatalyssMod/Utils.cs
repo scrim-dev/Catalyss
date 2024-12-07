@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Mirror;
+using UnityEngine;
 
 namespace CatalyssMod
 {
@@ -65,6 +66,11 @@ namespace CatalyssMod
             {
                 GetPlayer().GetComponentInChildren<StatusEntity>().Change_Mana(9999);
                 GetPlayer().GetComponentInChildren<StatusEntity>()._manaRegenRate = 9999;
+            }
+
+            if (CatalyssMonoMod.PlyrRotate)
+            {
+                //To do
             }
         }
 
