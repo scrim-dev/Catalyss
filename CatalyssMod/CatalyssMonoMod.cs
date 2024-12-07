@@ -94,7 +94,7 @@ namespace CatalyssMod
 
                                 if (Utils.GetPlayer() != null)
                                 {
-                                    //Utils.GetPlayer().GetComponent<PlayerMove>()._movSpeed = 150;
+                                    Utils.GetPlayer().GetComponent<PlayerMove>()._movSpeed = 150;
                                     Utils.GetPlayer().GetComponent<PlayerMove>().Add_MoveSpeed(100);
                                 }
                             }
@@ -104,8 +104,8 @@ namespace CatalyssMod
 
                                 if (Utils.GetPlayer() != null)
                                 {
+                                    Utils.GetPlayer().GetComponent<PlayerMove>()._movSpeed = 32;
                                     Utils.GetPlayer().GetComponent<PlayerMove>().Reset_MoveSpeed();
-                                    //Utils.GetPlayer().GetComponent<PlayerMove>()._movSpeed = 30;
                                 }
                             }
                         }
