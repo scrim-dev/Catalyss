@@ -86,24 +86,30 @@ namespace CatalyssMod
                     if (GUI.Button(new Rect(20, 30, 300, 30), $"Speed Boost [{SpeedBoostText}]"))
                     {
                         IsSpeedBoostActive = !IsSpeedBoostActive;
-                        if (IsSpeedBoostActive)
+                        try
                         {
-                            SpeedBoostText = "<color=green>ON</color>";
-
-                            if (Utils.GetPlayer() != null)
+                            if (IsSpeedBoostActive)
                             {
-                                Utils.GetPlayer().GetComponent<PlayerMove>()._movSpeed = 150;
+                                SpeedBoostText = "<color=green>ON</color>";
+
+                                if (Utils.GetPlayer() != null)
+                                {
+                                    //Utils.GetPlayer().GetComponent<PlayerMove>()._movSpeed = 150;
+                                    Utils.GetPlayer().GetComponent<PlayerMove>().Add_MoveSpeed(100);
+                                }
+                            }
+                            else
+                            {
+                                SpeedBoostText = "<color=red>OFF</color>";
+
+                                if (Utils.GetPlayer() != null)
+                                {
+                                    Utils.GetPlayer().GetComponent<PlayerMove>().Reset_MoveSpeed();
+                                    //Utils.GetPlayer().GetComponent<PlayerMove>()._movSpeed = 30;
+                                }
                             }
                         }
-                        else
-                        {
-                            SpeedBoostText = "<color=red>OFF</color>";
-
-                            if (Utils.GetPlayer() != null)
-                            {
-                                Utils.GetPlayer().GetComponent<PlayerMove>().Reset_MoveSpeed();
-                            }
-                        }
+                        catch { }
                     }
 
                     if (GUI.Button(new Rect(20, 70, 300, 30), $"Big Jump [{BigJumpText}]"))
