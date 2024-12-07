@@ -117,6 +117,12 @@ namespace CatalyssMod
             catch { return; }
         }
 
+        public static void Test(float jumpforce, float forwardforce, float gravmultiplier)
+        {
+            try { GetPlayer().GetComponentInChildren<PlayerMove>().Init_Jump(jumpforce, forwardforce, gravmultiplier); }
+            catch { return; }
+        }
+
         private void OnGUI() { GUI.Label(new Rect(15, 10, 2000, 30), $"{Application.unityVersion}"); }
     }
 }
