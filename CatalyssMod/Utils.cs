@@ -70,7 +70,6 @@ namespace CatalyssMod
             else
             {
                 GetPlayer().GetComponentInChildren<Player>()._inIFrame = false;
-                GetPlayer().GetComponentInChildren<Player>().Set_IFrame(0);
             }
 
             if(CatalyssMonoMod.InfManaTog)
@@ -95,7 +94,7 @@ namespace CatalyssMod
                 string s = File.ReadAllText($"{Directory.GetCurrentDirectory}\\PlayerSteamID.txt");
                 if (s.Length > 0)
                 {
-
+                    //To do
                 }
             }
             catch { return; }
