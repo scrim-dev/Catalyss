@@ -10,7 +10,7 @@ This was mostly done as a test project and for fun lol.
 
 ### Note(s)
 Launch the game, wait for the main menu to appear then inject or enter the game fully then inject, both ways work. <br>
-Press 'F' to Open and Close the Mod Menu. <br>
+Press 'TAB' to Open and Close the Mod Menu. <br>
 If any function breaks just turn it off and on again. <br>
 You can use this in multiplayer but it only works 85% of the time. <br>
 This game mod/trainer is for educational purposes. <br>
