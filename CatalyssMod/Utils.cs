@@ -1,9 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Threading;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CatalyssMod
 {
@@ -15,23 +10,6 @@ namespace CatalyssMod
         private void Awake()
         {
             Application.targetFrameRate = 999;
-        }
-
-        public static void Invoker(object Class, string Method, string _params)
-        {
-            Type type = Class.GetType();
-            if (type == null)
-            {
-                return;
-            }
-            MethodInfo method = type.GetMethod(Method, BindingFlags.NonPublic | BindingFlags.Instance);
-            if (method == null)
-            {
-                return;
-            }
-            object instance = Activator.CreateInstance(type);
-            object[] parameters = new object[] { _params };
-            try { method.Invoke(instance, parameters); } catch { }
         }
 
         private void Start()

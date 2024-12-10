@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CatalyssMod
 {
@@ -342,7 +341,6 @@ namespace CatalyssMod
                         if (Utils.GetPlayer() != null)
                         {
                             Utils.GetPlayer().GetComponentInChildren<Player>()._steamID = "CATALYSS EVILMANE INC";
-                            Utils.Invoker("Player", "Cmd_SetSteamID", "CATALYSS EVILMANE INC");
                         }
                     }
 
@@ -510,6 +508,14 @@ namespace CatalyssMod
                     if (GUI.Button(new Rect(20, 190, 300, 30), "Item Drop Menu"))
                     {
                         HandleItemDropMenu = !HandleItemDropMenu;
+                    }
+
+                    if (GUI.Button(new Rect(20, 230, 300, 30), "No AFK"))
+                    {
+                        if (Utils.GetPlayer() != null)
+                        {
+                            Utils.GetPlayer().GetComponentInChildren<Player>()._isAfk = false;
+                        }
                     }
 
                     break;

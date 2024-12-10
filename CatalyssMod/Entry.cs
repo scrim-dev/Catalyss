@@ -5,7 +5,7 @@ namespace CatalyssMod
     public class Entry
     {
         public static GameObject? ModObj;
-        public const string ModVersion = "1.5";
+        public const string ModVersion = "1.6";
         public static Rect GuiRect = new Rect(15, 15, 700, 600);
         public static bool GuiTog { get; set; } = false;
         public static bool DebuggerGUI { get; set; } = false;
@@ -14,12 +14,11 @@ namespace CatalyssMod
         {
             ModObj = new GameObject();
             ModObj.AddComponent<Utils>();
-            //ModObj.AddComponent<JsonTools>();
             ModObj.AddComponent<CatalyssMonoMod>();
             ModObj.AddComponent<ExtraGUIs>();
-            UnityEngine.Object.DontDestroyOnLoad(ModObj);
+            Object.DontDestroyOnLoad(ModObj);
         }
 
-        public static void Unload() { UnityEngine.Object.Destroy(ModObj); }
+        public static void Unload() { Object.Destroy(ModObj); }
     }
 }

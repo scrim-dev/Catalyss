@@ -17,12 +17,12 @@
     <div class="app-navbar-wrap" id="NavBarMain">
         <div class="app-navbar-topbar-mobile">
             <span class="app-navbar-toggler" data-win-toggle="navbar-left" data-win-target="#NavBarMain"></span>
-            <div><span class="app-navbar-name">Windows UI</span></div>
+            <div><span class="app-navbar-name">Catalyss Injector</span></div>
         </div>
         <nav class="app-navbar">
             <div class="app-navbar-header">
                 <span class="app-navbar-toggler" data-win-toggle="navbar-left" data-win-target="#NavBarMain" aria-controls="NavBarMain" aria-label="Toggle navigation"></span>
-                <span class="app-navbar-name">Windows UI</span>
+                <span class="app-navbar-name">Catalyss Injector</span>
             </div>
             <ul class="app-navbar-list" id="app-navbar-list">
                 <label class="app-navbar-theme-switch">
@@ -32,23 +32,34 @@
                 </label>
                 <li class="app-navbar-list-item">
                     <a href="./page1.html" class="unactive">
-                        <img src="../public/mountain.jpg">
-                        <span>Page1</span>
+                        <i class="icons10-home"></i>
+                        <span>Home</span>
                     </a>
                 </li>
                 <li class="app-navbar-list-item">
                     <a href="#" class="active">
-                        <i class="icons10-puzzle"></i>
-                        <span>Page2</span>
+                        <i class="icons10-services"></i>
+                        <span>Options</span>
                     </a>
                 </li>
             </ul>
         </nav>
     </div>
     <div class="app-page-container has-padding">
-        <h1>Page2</h1>
-        <p>Uhhh lorem ipsum LOL</p>
+        <h1>Options</h1>
+        <p>GUI Settings</p>
+
+        <button class="app-btn app-btn-danger" onclick="ResetGui()">
+            <span>Reset to V1 GUI</span>
+        </button>
+
+        <button class="app-btn app-btn-danger" onclick="ReloadGame()">
+            <span>Reload Game</span>
+        </button>
     </div>
+
+    <script src="alt.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/windows-ui-fabric@4.0.1/dist/windows-ui.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

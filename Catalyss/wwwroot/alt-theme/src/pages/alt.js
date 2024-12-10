@@ -1,4 +1,20 @@
-﻿function InjectDll() {
+﻿function GhBtn() {
+    window.external.sendMessage('LoadGhLink');
+}
+
+function DiscBtn() {
+    window.external.sendMessage('LoadDiscLink');
+}
+
+function ReloadGame() {
+    window.external.sendMessage('Reload_Game');
+}
+
+function ResetGui() {
+    window.external.sendMessage('Revert_GUI');
+}
+
+function InjectDll() {
     window.external.sendMessage('InjectMonoDll');
 }
 

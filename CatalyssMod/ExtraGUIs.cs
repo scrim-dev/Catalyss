@@ -38,10 +38,7 @@ namespace CatalyssMod
                 }
             }
 
-            if (Entry.DebuggerGUI)
-            {
-                //For testing I usually remove code in here.
-            }
+            if (Entry.DebuggerGUI) { }
         }
     }
 }

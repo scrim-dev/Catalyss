@@ -71,6 +71,51 @@ namespace Catalyss
             {
                 QuitGame();
             }
+            else if(message == "UseAlt")
+            {
+                if (!File.Exists($"{Directory.GetCurrentDirectory()}\\Catalyss.alt_theme"))
+                {
+                    File.WriteAllText($"{Directory.GetCurrentDirectory()}\\Catalyss.alt_theme", "true");
+                }
+            }
+            else if(message == "LoadGhLink")
+            {
+                OpenUrl("https://github.com/scrim-dev");
+            }
+            else if (message == "LoadDiscLink")
+            {
+                OpenUrl("https://discordapp.com/users/679060175440707605/");
+            }
+            else if (message == "Reload_Game")
+            {
+                QuitGame();
+                LaunchGame();
+            }
+            else if (message == "Revert_GUI")
+            {
+                try { File.Delete($"{Directory.GetCurrentDirectory()}\\Catalyss.alt_theme"); } catch { }
+                Program.AppMutex = "CAT_INJ_APP_NEW";
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "Catalyss.exe",
+                    //Arguments = "--bypass-mutex",
+                    UseShellExecute = true
+                });
+                Process.GetCurrentProcess().Kill();
+            }
+        }
+
+        private static void OpenUrl(string uri)
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = uri,
+                    UseShellExecute = true
+                });
+            }
+            catch { }
         }
 
         private static void QuitGame()

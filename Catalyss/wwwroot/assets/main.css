@@ -34,11 +34,11 @@ body {
 /* Center Box */
 .center-box {
     position: center;
-    width: 550px;
+    width: 615px;
     height: 400px;
-    background-color: rgba(30, 30, 30, 0.8);
+    background-color: rgba(20, 20, 20, 0.8);
     border-radius: 20px;
-    box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px 10px rgba(194, 66, 245, 0.5);
     text-align: center;
     z-index: 2;
     padding: 20px;
