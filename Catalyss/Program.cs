@@ -29,7 +29,7 @@ namespace Catalyss
                 try { Process.GetCurrentProcess().Kill(); } catch { Environment.Exit(0); }
             }
 
-            string windowTitle = "Catalyss Injector v1.1";
+            string windowTitle = "Catalyss Injector v1.2";
 
             // Creating a new PhotinoWindow instance with the fluent API
             var window = new PhotinoWindow()
