@@ -16,8 +16,7 @@ You can use this in multiplayer but it only works 85% of the time. <br>
 This game mod/trainer is for educational purposes. <br>
 
 ## Images
-![picfix](https://github.com/user-attachments/assets/95e4d468-5af9-4dd3-b0df-0e0919864d16)
-
+![previews](https://github.com/user-attachments/assets/43f278e3-c5a8-403e-9d0d-b0973831606f)
 
 ## Credits
 https://github.com/scrim-dev
